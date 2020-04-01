@@ -6,7 +6,9 @@ Clone the repo and open project in Android Studio. Project is using [productFlav
 
 ### Architecture
 
-Project follows [MVVM](https://developer.android.com/topic/libraries/architecture/viewmodel) architecture. Complement of the architecture is Dagger2-based dependency injection. Also package-by-feature name was used for project structure. All project code is written in Kotlin and Java, using standard Kotlin and Java coding conventions.
+Project follows [MVVM](https://developer.android.com/topic/libraries/architecture/viewmodel) architecture. Complement of the architecture is Dagger2-based dependency injection and also used coroutine and coroutine flow. Also package-by-feature name was used for project structure. All project code is written in Kotlin and Java, using standard Kotlin and Java coding conventions.
+
+<img alt="screenshot" src="./mvvm_daigram.png" width="45%" />
 
 ## Git Conventions
 
