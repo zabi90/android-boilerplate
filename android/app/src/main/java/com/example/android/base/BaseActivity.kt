@@ -11,12 +11,12 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.android.AndroidApp
 import com.example.android.R
 import com.example.android.receivers.NetworkConnectionReceiver
 import com.google.android.material.snackbar.Snackbar
-
 
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -28,12 +28,15 @@ abstract class BaseActivity : AppCompatActivity() {
     val component by lazy {
         app.appComponent
     }
+    private var baseViewModel: BaseViewModel? = null
 
     private val loadingFragment: LoadingFragment = LoadingFragment()
 
     abstract fun inject()
 
     abstract fun setListeners()
+
+    abstract fun setViewModel(): BaseViewModel?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,16 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         setListeners()
+        baseViewModel = setViewModel()
+        baseViewModel?.let {
+            it.isLoading.observe(this, Observer { isLoading ->
+                if (isLoading) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                }
+            })
+        }
     }
 
     override fun onResume() {
@@ -52,10 +65,12 @@ abstract class BaseActivity : AppCompatActivity() {
             IntentFilter(NetworkConnectionReceiver.CONNECTION_RECEIVER_ACTION)
         )
     }
+
     override fun onPause() {
         super.onPause()
         LocalBroadcastManager.getInstance(this).unregisterReceiver(listener)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> onBackPressed()
@@ -63,14 +78,15 @@ abstract class BaseActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun setupActionBar(title:String,showBack:Boolean){
+    fun setupActionBar(title: String, showBack: Boolean) {
 
-        if(showBack){
+        if (showBack) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         supportActionBar?.title = title
 
     }
+
     fun showLoading() {
         if (!loadingFragment.isAdded) {
             loadingFragment.show(supportFragmentManager, "loading")

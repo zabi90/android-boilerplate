@@ -1,5 +1,7 @@
 package com.example.android.base
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import retrofit2.HttpException
 import java.io.IOException
@@ -7,6 +9,12 @@ import java.net.SocketTimeoutException
 import com.example.android.network.Error
 
 open class BaseViewModel : ViewModel() {
+
+    protected val loading: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
+
+    val isLoading: LiveData<Boolean> = loading
 
     fun onHandleError(error: Throwable): Error {
 

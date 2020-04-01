@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.R
 import com.example.android.base.BaseActivity
+import com.example.android.base.BaseViewModel
 import com.example.android.injection.ViewModelFactory
 import com.example.android.viewmodels.MainViewModel
 import javax.inject.Inject
@@ -19,6 +20,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProvider(this,viewModelFactory)[MainViewModel::class.java]
+        viewModel.loadFeeds()
     }
     // endregion
 
@@ -29,6 +31,10 @@ class MainActivity : BaseActivity() {
 
     override fun setListeners() {
 
+    }
+
+    override fun setViewModel(): BaseViewModel? {
+       return viewModel
     }
     //endregion
 }
