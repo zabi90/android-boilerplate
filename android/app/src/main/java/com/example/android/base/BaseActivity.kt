@@ -15,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.android.AndroidApp
 import com.example.android.R
+import com.example.android.extensions.showSnackBar
+import com.example.android.extensions.toast
 import com.example.android.receivers.NetworkConnectionReceiver
 import com.google.android.material.snackbar.Snackbar
 
@@ -54,6 +56,10 @@ abstract class BaseActivity : AppCompatActivity() {
                 } else {
                     hideLoading()
                 }
+            })
+
+            it.errorMessage.observe(this, Observer {error->
+                toast(error.description)
             })
         }
     }
@@ -100,11 +106,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun showSnackBar(restId: Int, color: Int = Color.BLACK) {
-        val snackBar = Snackbar.make(window.decorView.rootView, restId, Snackbar.LENGTH_LONG)
-        snackBar.view.setBackgroundColor(color)
-        snackBar.show()
-    }
+
 
     private val listener = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {

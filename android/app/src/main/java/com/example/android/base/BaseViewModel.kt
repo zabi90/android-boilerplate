@@ -10,11 +10,18 @@ import com.example.android.network.Error
 
 open class BaseViewModel : ViewModel() {
 
-    protected val loading: MutableLiveData<Boolean> by lazy {
+    protected val _errorMessage: MutableLiveData<Error> by lazy {
+        MutableLiveData<Error>()
+    }
+
+    val errorMessage: LiveData<Error> = _errorMessage
+
+    protected val _loading: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
     }
 
-    val isLoading: LiveData<Boolean> = loading
+    val isLoading: LiveData<Boolean> = _loading
+
 
     fun onHandleError(error: Throwable): Error {
 
