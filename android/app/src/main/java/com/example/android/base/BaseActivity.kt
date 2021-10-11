@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +17,6 @@ import com.example.android.R
 import com.example.android.extensions.showSnackBar
 import com.example.android.extensions.toast
 import com.example.android.receivers.NetworkConnectionReceiver
-import com.google.android.material.snackbar.Snackbar
 
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -27,23 +25,15 @@ abstract class BaseActivity : AppCompatActivity() {
     val Activity.app: AndroidApp
         get() = application as AndroidApp
 
-    val component by lazy {
-        app.appComponent
-    }
+
     private var baseViewModel: BaseViewModel? = null
 
     private val loadingFragment: LoadingFragment = LoadingFragment()
-
-    abstract fun inject()
 
     abstract fun setListeners()
 
     abstract fun setViewModel(): BaseViewModel?
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        inject()
-    }
 
     override fun onStart() {
         super.onStart()

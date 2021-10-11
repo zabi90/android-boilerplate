@@ -5,6 +5,8 @@ import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -15,6 +17,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Named
 
 @Module
+@InstallIn(SingletonComponent::class)
 class RetrofitModule {
     companion object {
         const val PUBLIC_CLIENT = "publicClient"

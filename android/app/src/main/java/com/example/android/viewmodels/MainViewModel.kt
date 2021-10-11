@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.base.BaseViewModel
 import com.example.android.models.User
 import com.example.android.repositories.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -16,10 +17,11 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(private val userRepository: UserRepository) :
     BaseViewModel() {
 
-    @ExperimentalCoroutinesApi
+
     fun loadFeeds(): LiveData<List<User>> {
         val response = MutableLiveData<List<User>>()
         viewModelScope.launch {

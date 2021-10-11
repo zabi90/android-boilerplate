@@ -4,8 +4,11 @@ import com.example.android.network.services.UserService
 import com.example.android.repositories.UserRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 class RepositoryModule{
 
     @Provides
