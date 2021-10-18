@@ -6,13 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.android.R
-import kotlinx.android.synthetic.main.loading_fragment.*
+import com.example.android.databinding.LoadingFragmentBinding
 
 
 class LoadingFragment : DialogFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return layoutInflater.inflate(R.layout.loading_fragment, container, false)
+
+    private var _binding: LoadingFragmentBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        _binding = LoadingFragmentBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +31,12 @@ class LoadingFragment : DialogFragment() {
         setStyle(STYLE_NORMAL, R.style.DialogTheme)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     fun setTitle(title:String){
-        statusTextView.text = title
+        binding.statusTextView.text = title
     }
 }
