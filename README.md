@@ -38,7 +38,7 @@ Commit Messages should be clear, concise and descriptive of the purpose of the c
 
 ## Libraries
 
-* [Dagger-2](https://github.com/google/dagger) Dagger 2 is a compile-time evolution approach to dependency injection.
+* [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) Hilt is a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
 * [Material Components](https://material.io/develop/android/) Google offical material design library for Android.
 * [RetroFit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java
 * [Room](https://developer.android.com/topic/libraries/architecture/room?gclid=CjwKCAjwo9rtBRAdEiwA_WXcFl0dpqQ4MlZAP9cW7a1tVxWgc2sy3eq5sn26_KpG8dAoRf9G3y1nmBoCmIQQAvD_BwE) - The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
